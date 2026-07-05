@@ -44,8 +44,11 @@ app.set("layout", "layouts/main");
 
 // ---------- Routes ----------
 
+
 app.get("/", (req, res) => {
-  res.send(" Quiet Luxury Nepal is running!");
+    res.render("pages/home", {
+        title: "Home"
+    });
 });
 
 export default app;
