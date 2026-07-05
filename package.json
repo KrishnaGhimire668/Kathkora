@@ -16,6 +16,7 @@
     "express": "^5.1.0",
     "helmet": "^8.1.0",
     "htmx.org": "^2.0.6",
+    "lucide": "^1.23.0",
     "mongoose": "^8.18.0",
     "morgan": "^1.10.0",
     "redis": "^5.8.2"
