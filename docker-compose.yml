@@ -1,0 +1,51 @@
+version: "3.9"
+
+services:
+  app:
+    build: .
+    container_name: nepal-store-app
+
+    ports:
+      - "3000:3000"
+
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+      MONGO_URI: mongodb://mongo:27017/nepal_store
+      REDIS_URL: redis://redis:6379
+
+    depends_on:
+      - mongo
+      - redis
+
+    command: npm run dev
+
+  mongo:
+    image: mongo:8
+
+    container_name: nepal-store-mongo
+
+    ports:
+      - "27017:27017"
+
+    volumes:
+      - mongo-data:/data/db
+
+  redis:
+    image: redis:8-alpine
+
+    container_name: nepal-store-redis
+
+    ports:
+      - "6379:6379"
+
+    volumes:
+      - redis-data:/data
+
+volumes:
+  mongo-data:
+  redis-data:
