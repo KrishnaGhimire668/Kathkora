@@ -12,8 +12,23 @@
   --color-accent: #d6c6a5;
 }
 
+
+
 body {
   background: var(--color-bg);
   color: var(--color-text);
   font-family: Inter, sans-serif;
+}
+
+::selection {
+  background: #d6c6a5;
+  color: #111315;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+a {
+  transition: all 0.25s ease;
 }
