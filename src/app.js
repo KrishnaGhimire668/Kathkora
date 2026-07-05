@@ -1,7 +1,6 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import expressLayouts from "express-ejs-layouts";
 import compression from "compression";
 import helmet from "helmet";
 import morgan from "morgan";
@@ -38,16 +37,14 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-app.use(expressLayouts);
 
-app.set("layout", "layouts/main");
 
 // ---------- Routes ----------
 
 
 app.get("/", (req, res) => {
     res.render("pages/home", {
-        title: "Home"
+        title: "Kathakora"
     });
 });
 

@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- Brand Theme ---------- */
+
+:root {
+  --color-bg: #111315;
+  --color-surface: #1b1d20;
+  --color-text: #f8f8f6;
+  --color-muted: #9ca3af;
+  --color-accent: #d6c6a5;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: Inter, sans-serif;
+}
