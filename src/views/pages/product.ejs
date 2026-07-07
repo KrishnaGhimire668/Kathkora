@@ -40,44 +40,82 @@
             Crafted in Nepal using timeless design and quality materials.
         </p>
 
-        <!-- Sizes -->
-        <div class="mt-10">
+        <!-- Purchase Form -->
+        <form
+            id="add-to-cart-form"
+            class="mt-10 space-y-8">
 
-            <p class="mb-4 text-sm uppercase tracking-[0.3em] text-stone-500">
-                Select Size
-            </p>
+            <input
+                type="hidden"
+                name="productId"
+                value="<%= product._id %>">
 
-            <div class="flex flex-wrap gap-3">
+            <input
+                type="hidden"
+                name="size"
+                id="selected-size">
 
-                <% product.sizes.forEach(size => { %>
+            <!-- Sizes -->
+            <div>
 
-                    <button
-                        type="button"
-                        class="rounded-full border border-white/20 px-5 py-2 transition hover:bg-white hover:text-black">
+                <p class="mb-4 text-sm uppercase tracking-[0.3em] text-stone-500">
+                    Size
+                </p>
 
-                        <%= size %>
+                <div class="flex flex-wrap gap-3">
 
-                    </button>
+                    <% product.sizes.forEach(size => { %>
 
-                <% }) %>
+                        <button
+                            type="button"
+                            data-size="<%= size %>"
+                            class="size-btn rounded-full border border-white/20 px-5 py-2 transition hover:bg-white hover:text-black">
+
+                            <%= size %>
+
+                        </button>
+
+                    <% }) %>
+
+                </div>
 
             </div>
 
-        </div>
+            <!-- Quantity -->
 
-        <!-- Add To Cart -->
+            <div>
 
-        <button
-            class="mt-12 rounded-full bg-white px-10 py-4 font-medium text-black transition hover:opacity-90">
+                <p class="mb-4 text-sm uppercase tracking-[0.3em] text-stone-500">
+                    Quantity
+                </p>
 
-            Add To Cart
+                <input
+                    type="number"
+                    name="quantity"
+                    value="1"
+                    min="1"
+                    class="w-24 rounded-lg border border-white/20 bg-transparent px-4 py-3">
 
-        </button>
+            </div>
+
+            <!-- Add To Cart -->
+
+            <button
+                type="submit"
+                class="rounded-full bg-white px-10 py-4 font-medium text-black transition hover:opacity-90">
+
+                Add To Cart
+
+            </button>
+
+        </form>
 
     </div>
 
 </section>
 
 </main>
+
+<script src="/js/product.js"></script>
 
 <%- include("../partials/footer") %>
