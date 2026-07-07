@@ -6,19 +6,21 @@
 
 <section class="mx-auto grid max-w-7xl gap-16 px-6 py-16 lg:grid-cols-2">
 
+    <!-- Product Image -->
     <div>
 
-        <div class="aspect-[4/5] rounded-3xl bg-neutral-800">
+        <div class="aspect-[4/5] overflow-hidden rounded-3xl bg-neutral-800">
 
             <img
                 src="<%= product.image %>"
                 alt="<%= product.name %>"
-                class="h-full w-full rounded-3xl object-cover">
+                class="h-full w-full object-cover">
 
         </div>
 
     </div>
 
+    <!-- Product Info -->
     <div>
 
         <p class="uppercase tracking-[0.35em] text-sm text-stone-500">
@@ -29,21 +31,46 @@
             <%= product.name %>
         </h1>
 
-        <p class="mt-6 text-3xl">
+        <p class="mt-6 text-3xl font-medium">
             Rs. <%= product.price.toLocaleString() %>
         </p>
 
-        <p class="mt-10 leading-8 text-stone-400">
-
+        <p class="mt-8 leading-8 text-stone-400">
             Premium clothing inspired by Himalayan minimalism.
-            Crafted for everyday luxury.
-
+            Crafted in Nepal using timeless design and quality materials.
         </p>
 
-        <button
-            class="mt-12 rounded-full bg-white px-10 py-4 font-medium text-black">
+        <!-- Sizes -->
+        <div class="mt-10">
 
-            Add to Cart
+            <p class="mb-4 text-sm uppercase tracking-[0.3em] text-stone-500">
+                Select Size
+            </p>
+
+            <div class="flex flex-wrap gap-3">
+
+                <% product.sizes.forEach(size => { %>
+
+                    <button
+                        type="button"
+                        class="rounded-full border border-white/20 px-5 py-2 transition hover:bg-white hover:text-black">
+
+                        <%= size %>
+
+                    </button>
+
+                <% }) %>
+
+            </div>
+
+        </div>
+
+        <!-- Add To Cart -->
+
+        <button
+            class="mt-12 rounded-full bg-white px-10 py-4 font-medium text-black transition hover:opacity-90">
+
+            Add To Cart
 
         </button>
 

@@ -7,6 +7,7 @@ export default [
     category: "Outerwear",
     featured: true,
     stock: 20,
+    sizes: ["S", "M", "L", "XL"]
   },
   {
     name: "Everest Tee",
@@ -16,6 +17,7 @@ export default [
     category: "T-Shirts",
     featured: true,
     stock: 30,
+    sizes: ["S", "M", "L", "XL"]
   },
   {
     name: "Kathmandu Hoodie",
@@ -25,5 +27,6 @@ export default [
     category: "Hoodies",
     featured: false,
     stock: 18,
+    sizes: ["S", "M", "L", "XL"]
   },
 ];
