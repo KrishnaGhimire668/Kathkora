@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
-    "css": "tailwindcss -i ./public/css/input.css -o ./public/css/output.css --watch"
+    "css": "tailwindcss -i ./public/css/input.css -o ./public/css/output.css --watch",
+    "seed": "node src/seeds/seed.js"
   },
   "dependencies": {
     "compression": "^1.8.0",
