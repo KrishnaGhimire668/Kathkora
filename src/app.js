@@ -4,6 +4,10 @@ import { fileURLToPath } from "url";
 import compression from "compression";
 import helmet from "helmet";
 import morgan from "morgan";
+import webRoutes from "./routes/web.js";
+
+
+
 
 const app = express();
 
@@ -40,12 +44,7 @@ app.set("views", path.join(__dirname, "views"));
 
 
 // ---------- Routes ----------
+app.use("/", webRoutes);
 
-
-app.get("/", (req, res) => {
-    res.render("pages/home", {
-        title: "Kathakora"
-    });
-});
 
 export default app;
