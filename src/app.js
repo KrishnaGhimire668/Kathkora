@@ -32,9 +32,17 @@ app.use(express.urlencoded({ extended: true }));
 // Parse JSON
 app.use(express.json());
 
+
 // ---------- Static Files ----------
 
 app.use(express.static(path.join(__dirname, "../public")));
+
+app.use(
+    "/vendor/htmx",
+    express.static(
+        path.join(__dirname, "../node_modules/htmx.org/dist")
+    )
+);
 
 // ---------- View Engine ----------
 

@@ -1,0 +1,163 @@
+<%- include("../partials/head") %>
+
+<%- include("../partials/navbar") %>
+
+<main class="mx-auto max-w-7xl px-6 pt-24 pb-20">
+
+    <div class="mb-12 flex items-center justify-between">
+
+        <h1 class="text-4xl font-semibold">
+            Shopping Cart
+        </h1>
+
+        <a
+            href="/shop"
+            class="rounded-full border border-white/20 px-6 py-3 transition hover:bg-white hover:text-black">
+
+            ← Continue Shopping
+
+        </a>
+
+    </div>
+
+    <% if (cartItems.length === 0) { %>
+
+        <div class="rounded-3xl border border-white/10 p-16 text-center">
+
+            <h2 class="text-3xl font-semibold">
+                Your cart is empty
+            </h2>
+
+            <p class="mt-4 text-stone-400">
+                Browse our latest Himalayan collection.
+            </p>
+
+            <a
+                href="/shop"
+                class="mt-8 inline-block rounded-full bg-white px-8 py-3 font-medium text-black">
+
+                Shop Now
+
+            </a>
+
+        </div>
+
+    <% } else { %>
+
+    <div class="grid gap-10 lg:grid-cols-3">
+
+        <!-- Cart Items -->
+
+        <div class="space-y-6 lg:col-span-2">
+
+            <% cartItems.forEach(item => { %>
+
+            <div class="flex gap-5 rounded-3xl border border-white/10 p-5">
+
+                <img
+                    src="<%= item.image %>"
+                    alt="<%= item.name %>"
+                    class="h-32 w-28 rounded-xl bg-neutral-800 object-cover">
+
+                <div class="flex flex-1 flex-col justify-between">
+
+                    <div>
+
+                        <h2 class="text-2xl font-medium">
+                            <%= item.name %>
+                        </h2>
+
+                        <p class="mt-2 text-stone-400">
+                            Size: <%= item.size %>
+                        </p>
+
+                        <p class="text-stone-400">
+                            Quantity: <%= item.quantity %>
+                        </p>
+
+                    </div>
+
+                    <div class="flex items-center justify-between">
+
+                        <p class="text-stone-400">
+                            Rs. <%= item.price.toLocaleString() %>
+                        </p>
+
+                        <p class="text-xl font-semibold">
+                            Rs. <%= item.subtotal.toLocaleString() %>
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <% }) %>
+
+        </div>
+
+        <!-- Order Summary -->
+
+        <div>
+
+            <div class="sticky top-28 rounded-3xl border border-white/10 p-8">
+
+                <h2 class="text-2xl font-semibold">
+                    Order Summary
+                </h2>
+
+                <div class="mt-8 flex justify-between">
+
+                    <span class="text-stone-400">
+                        Items
+                    </span>
+
+                    <span>
+                        <%= cartItems.length %>
+                    </span>
+
+                </div>
+
+                <div class="mt-4 flex justify-between">
+
+                    <span class="text-stone-400">
+                        Shipping
+                    </span>
+
+                    <span>
+                        Free
+                    </span>
+
+                </div>
+
+                <hr class="my-8 border-white/10">
+
+                <div class="flex justify-between text-2xl font-semibold">
+
+                    <span>Total</span>
+
+                    <span>
+                        Rs. <%= total.toLocaleString() %>
+                    </span>
+
+                </div>
+
+                <button
+                    class="mt-8 w-full rounded-full bg-white py-4 font-semibold text-black transition hover:opacity-90">
+
+                    Proceed to Checkout
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <% } %>
+
+</main>
+
+<%- include("../partials/footer") %>
