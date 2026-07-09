@@ -71,21 +71,73 @@
                             Size: <%= item.size %>
                         </p>
 
-                        <p class="text-stone-400">
-                            Quantity: <%= item.quantity %>
-                        </p>
+                        <!-- Quantity Controls -->
+
+                        <div class="mt-4 flex items-center gap-3">
+
+                            <form
+                                action="/cart/decrease/<%= item.cartIndex %>"
+                                method="POST">
+
+                                <button
+                                    type="submit"
+                                    class="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-xl transition hover:bg-white hover:text-black">
+
+                                    −
+
+                                </button>
+
+                            </form>
+
+                            <span class="min-w-8 text-center text-lg font-medium">
+                                <%= item.quantity %>
+                            </span>
+
+                            <form
+                                action="/cart/increase/<%= item.cartIndex %>"
+                                method="POST">
+
+                                <button
+                                    type="submit"
+                                    class="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-xl transition hover:bg-white hover:text-black">
+
+                                    +
+
+                                </button>
+
+                            </form>
+
+                        </div>
 
                     </div>
 
-                    <div class="flex items-center justify-between">
+                    <div class="mt-6 flex items-center justify-between">
 
-                        <p class="text-stone-400">
-                            Rs. <%= item.price.toLocaleString() %>
-                        </p>
+                        <div>
 
-                        <p class="text-xl font-semibold">
-                            Rs. <%= item.subtotal.toLocaleString() %>
-                        </p>
+                            <p class="text-stone-400">
+                                Rs. <%= item.price.toLocaleString() %>
+                            </p>
+
+                            <p class="text-xl font-semibold">
+                                Rs. <%= item.subtotal.toLocaleString() %>
+                            </p>
+
+                        </div>
+
+                        <form
+                            action="/cart/remove/<%= item.cartIndex %>"
+                            method="POST">
+
+                            <button
+                                type="submit"
+                                class="rounded-full border border-red-500 px-5 py-2 text-red-400 transition hover:bg-red-500 hover:text-white">
+
+                                Remove
+
+                            </button>
+
+                        </form>
 
                     </div>
 

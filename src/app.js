@@ -6,6 +6,13 @@ import helmet from "helmet";
 import morgan from "morgan";
 import webRoutes from "./routes/web.js";
 
+import session from "express-session";
+import { RedisStore } from "connect-redis";
+
+import redis from "./config/redis.js";
+import passport from "./config/passport.js";
+import authRoutes from "./routes/auth.js";
+import adminRoutes from "./routes/admin.js";
 
 
 
@@ -32,6 +39,27 @@ app.use(express.urlencoded({ extended: true }));
 // Parse JSON
 app.use(express.json());
 
+app.use(
+    session({
+        store: new RedisStore({
+            client: redis,
+        }),
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+        },
+    })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use((req, res, next) => {
+    res.locals.user = req.user || null;
+    next();
+});
+
 
 // ---------- Static Files ----------
 
@@ -52,6 +80,8 @@ app.set("views", path.join(__dirname, "views"));
 
 
 // ---------- Routes ----------
+app.use("/auth", authRoutes);
+app.use("/admin", adminRoutes);
 app.use("/", webRoutes);
 
 

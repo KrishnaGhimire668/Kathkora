@@ -2,8 +2,14 @@ import { Router } from "express";
 import { home } from "../controllers/homeController.js";
 import { shop } from "../controllers/shopController.js";
 import { productDetails } from "../controllers/productController.js";
-import { addToCart } from "../controllers/cartController.js";
-import { viewCart } from "../controllers/cartController.js"; // New import
+
+import {
+    addToCart,
+    viewCart,
+    removeFromCart,
+    increaseQuantity,
+    decreaseQuantity,
+} from "../controllers/cartController.js";
 
 const router = Router();
 
@@ -15,6 +21,12 @@ router.get("/product/:slug", productDetails);
 
 router.post("/cart", addToCart);
 
-router.get("/cart", viewCart); // New route
+router.get("/cart", viewCart);
+
+router.post("/cart/remove/:index", removeFromCart);
+
+router.post("/cart/increase/:index", increaseQuantity);
+
+router.post("/cart/decrease/:index", decreaseQuantity);
 
 export default router;
