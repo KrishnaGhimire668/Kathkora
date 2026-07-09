@@ -2,26 +2,47 @@ import redis from "../config/redis.js";
 import Product from "../models/Product.js";
 
 export async function addToCart(req, res) {
-    const { productId, size, quantity } = req.body;
+    try {
+        const { productId, size, quantity } = req.body;
 
-    if (!size) {
-        return res.status(400).send("Please select a size.");
+        if (!productId) {
+            return res.status(400).json({
+                success: false,
+                message: "Missing product."
+            });
+        }
+
+        if (!size) {
+            return res.status(400).json({
+                success: false,
+                message: "Please select a size."
+            });
+        }
+
+        const cartKey = "kathakora:cart:guest";
+
+        await redis.rPush(
+            cartKey,
+            JSON.stringify({
+                productId,
+                size,
+                quantity: Number(quantity) || 1,
+            })
+        );
+
+        return res.status(200).json({
+            success: true,
+            message: "Added to cart"
+        });
+
+    } catch (err) {
+        console.error(err);
+
+        return res.status(500).json({
+            success: false,
+            message: "Internal Server Error"
+        });
     }
-
-    const cartKey = "kathakora:cart:guest";
-
-    const item = {
-        productId,
-        size,
-        quantity: Number(quantity),
-    };
-
-    await redis.rPush(cartKey, JSON.stringify(item));
-
-    // Trigger HTMX event on success
-    res.set("HX-Trigger", "cart-added");
-
-    return res.send("");
 }
 
 export async function viewCart(req, res) {

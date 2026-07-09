@@ -20,11 +20,17 @@
 
     <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
 
-        <% featuredProducts.forEach(product => { %>
+        <% featuredProducts.forEach(product=> { %>
 
-            <article class="group overflow-hidden rounded-3xl border border-white/10 bg-[#181818]">
+            <a href="/product/<%= product.slug %>"
+                class="group overflow-hidden rounded-3xl border border-white/10 bg-[#181818]">
 
-                <div class="aspect-[4/5] bg-neutral-800"></div>
+                <div class="aspect-[4/5] bg-neutral-800 overflow-hidden">
+
+                    <img src="<%= product.image %>" alt="<%= product.name %>"
+                        class="h-full w-full object-cover transition duration-500 group-hover:scale-105">
+
+                </div>
 
                 <div class="p-6">
 
@@ -38,9 +44,9 @@
 
                 </div>
 
-            </article>
+            </a>
 
-        <% }) %>
+            <% }) %>
 
     </div>
 
