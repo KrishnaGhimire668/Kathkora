@@ -25,7 +25,7 @@ export default [
     price: 6500,
     image: "/images/products/hoodie.png",
     category: "Hoodies",
-    featured: false,
+    featured: true,
     stock: 18,
     sizes: ["S", "M", "L", "XL"]
   },
