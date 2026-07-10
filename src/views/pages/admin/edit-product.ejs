@@ -1,0 +1,95 @@
+<%- include("../../partials/head") %>
+<%- include("../../partials/navbar") %>
+
+<main class="mx-auto max-w-3xl px-6 py-24">
+
+    <h1 class="mb-10 text-4xl font-semibold">
+        Edit Product
+    </h1>
+
+    <form
+        action="/admin/products/edit/<%= product._id %>"
+        method="POST"
+        class="space-y-6">
+
+        <input
+            type="text"
+            name="name"
+            value="<%= product.name %>"
+            required
+            class="w-full rounded-xl border border-white/10 bg-transparent p-4">
+
+        <input
+            type="text"
+            name="slug"
+            value="<%= product.slug %>"
+            required
+            class="w-full rounded-xl border border-white/10 bg-transparent p-4">
+
+        <input
+            type="number"
+            name="price"
+            value="<%= product.price %>"
+            required
+            class="w-full rounded-xl border border-white/10 bg-transparent p-4">
+
+        <input
+            type="text"
+            name="image"
+            value="<%= product.image %>"
+            required
+            class="w-full rounded-xl border border-white/10 bg-transparent p-4">
+
+        <input
+            type="text"
+            name="category"
+            value="<%= product.category %>"
+            required
+            class="w-full rounded-xl border border-white/10 bg-transparent p-4">
+
+        <input
+            type="number"
+            name="stock"
+            value="<%= product.stock %>"
+            required
+            class="w-full rounded-xl border border-white/10 bg-transparent p-4">
+
+        <input
+            type="text"
+            name="sizes"
+            value="<%= product.sizes.join(',') %>"
+            class="w-full rounded-xl border border-white/10 bg-transparent p-4">
+
+        <label class="flex items-center gap-3">
+            <input
+                type="checkbox"
+                name="featured"
+                <%= product.featured ? "checked" : "" %>>
+            Featured Product
+        </label>
+
+        <div class="flex gap-4">
+
+            <button
+                type="submit"
+                class="rounded-full bg-white px-8 py-4 font-semibold text-black">
+
+                Update Product
+
+            </button>
+
+            <a
+                href="/admin/products"
+                class="rounded-full border border-white/20 px-8 py-4">
+
+                Cancel
+
+            </a>
+
+        </div>
+
+    </form>
+
+</main>
+
+<%- include("../../partials/footer") %>

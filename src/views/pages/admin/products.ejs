@@ -1,0 +1,110 @@
+<%- include("../../partials/head") %>
+<%- include("../../partials/navbar") %>
+
+<main class="mx-auto max-w-7xl px-6 py-24">
+
+    <div class="mb-10 flex items-center justify-between">
+
+        <div>
+            <h1 class="text-4xl font-semibold">
+                Products
+            </h1>
+
+            <p class="mt-2 text-stone-400">
+                Manage your product catalog.
+            </p>
+        </div>
+
+        <a
+            href="/admin/products/new"
+            class="rounded-full bg-white px-6 py-3 font-medium text-black transition hover:opacity-90">
+
+            + Add Product
+
+        </a>
+
+    </div>
+
+    <div class="overflow-hidden rounded-3xl border border-white/10">
+
+        <table class="w-full">
+
+            <thead class="border-b border-white/10">
+
+                <tr class="text-left">
+
+                    <th class="p-5">Image</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <% products.forEach(product => { %>
+
+                    <tr class="border-b border-white/5">
+
+                        <td class="p-5">
+
+                            <img
+                                src="<%= product.image %>"
+                                class="h-16 w-16 rounded-xl object-cover">
+
+                        </td>
+
+                        <td><%= product.name %></td>
+
+                        <td><%= product.category %></td>
+
+                        <td>Rs. <%= product.price.toLocaleString() %></td>
+
+                        <td><%= product.stock %></td>
+
+                        <td>
+
+                            <div class="flex gap-3">
+
+                                <a
+                                    href="/admin/products/edit/<%= product._id %>"
+                                    class="rounded-full border border-white/20 px-4 py-2">
+
+                                    Edit
+
+                                </a>
+
+                                <form
+                                    action="/admin/products/delete/<%= product._id %>"
+                                    method="POST">
+
+                                    <button
+                                        class="rounded-full border border-red-500 px-4 py-2 text-red-400">
+
+                                        Delete
+
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                <% }) %>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</main>
+
+<%- include("../../partials/footer") %>
