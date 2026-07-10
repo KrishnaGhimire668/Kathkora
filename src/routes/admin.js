@@ -1,4 +1,7 @@
 import { Router } from "express";
+
+import isAdmin from "../middleware/isAdmin.js";
+
 import {
     dashboard,
     products,
@@ -7,9 +10,8 @@ import {
     editProduct,
     updateProduct,
     deleteProduct,
+    orders,
 } from "../controllers/adminController.js";
-
-import isAdmin from "../middleware/isAdmin.js";
 
 const router = Router();
 
@@ -26,5 +28,7 @@ router.get("/products/edit/:id", isAdmin, editProduct);
 router.post("/products/edit/:id", isAdmin, updateProduct);
 
 router.post("/products/delete/:id", isAdmin, deleteProduct);
+
+router.get("/orders", isAdmin, orders);
 
 export default router;

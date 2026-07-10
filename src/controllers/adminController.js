@@ -1,4 +1,5 @@
 import Product from "../models/Product.js";
+import Order from "../models/Order.js";
 
 export function dashboard(req, res) {
     res.render("pages/admin/dashboard", {
@@ -127,5 +128,24 @@ export async function deleteProduct(req, res) {
     } catch (err) {
         console.error(err);
         res.status(500).send("Internal Server Error");
+    }
+}
+
+export async function orders(req, res) {
+    try {
+
+        const orders = await Order.find()
+            .sort({ createdAt: -1 });
+
+        res.render("pages/admin/orders", {
+            title: "Orders",
+            orders,
+        });
+
+    } catch (err) {
+
+        console.error(err);
+        res.status(500).send("Internal Server Error");
+
     }
 }

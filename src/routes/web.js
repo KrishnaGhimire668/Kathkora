@@ -17,6 +17,8 @@ import {
     placeOrder,
 } from "../controllers/checkoutController.js";
 
+import { myOrders } from "../controllers/ordersController.js";
+
 const router = Router();
 
 router.get("/", home);
@@ -45,4 +47,5 @@ router.get("/checkout/success", (req, res) => {
 
 router.post("/checkout", placeOrder);
 
+router.get("/orders", myOrders);
 export default router;

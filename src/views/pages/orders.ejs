@@ -1,0 +1,94 @@
+<%- include("../partials/head") %>
+<%- include("../partials/navbar") %>
+
+<main class="mx-auto max-w-7xl px-6 pt-24 pb-20">
+
+    <h1 class="mb-10 text-4xl font-semibold">
+        My Orders
+    </h1>
+
+    <% if (!orders.length) { %>
+
+        <div class="rounded-3xl border border-white/10 p-12 text-center">
+
+            <h2 class="text-2xl font-semibold">
+                No orders yet
+            </h2>
+
+            <a
+                href="/shop"
+                class="mt-8 inline-block rounded-full bg-white px-6 py-3 font-medium text-black">
+
+                Continue Shopping
+
+            </a>
+
+        </div>
+
+    <% } else { %>
+
+        <div class="space-y-8">
+
+            <% orders.forEach(order => { %>
+
+                <div class="rounded-3xl border border-white/10 p-8">
+
+                    <div class="mb-6 flex items-center justify-between">
+
+                        <div>
+
+                            <h2 class="text-xl font-semibold">
+                                Order #<%= order._id.toString().slice(-6).toUpperCase() %>
+                            </h2>
+
+                            <p class="text-stone-400">
+                                <%= order.createdAt.toDateString() %>
+                            </p>
+
+                        </div>
+
+                        <span class="rounded-full border border-white/20 px-4 py-2">
+                            <%= order.status %>
+                        </span>
+
+                    </div>
+
+                    <% order.items.forEach(item => { %>
+
+                        <div class="flex justify-between py-2">
+
+                            <span>
+                                <%= item.name %> × <%= item.quantity %>
+                            </span>
+
+                            <span>
+                                Rs. <%= (item.price * item.quantity).toLocaleString() %>
+                            </span>
+
+                        </div>
+
+                    <% }) %>
+
+                    <hr class="my-6 border-white/10">
+
+                    <div class="flex justify-between text-xl font-semibold">
+
+                        <span>Total</span>
+
+                        <span>
+                            Rs. <%= order.total.toLocaleString() %>
+                        </span>
+
+                    </div>
+
+                </div>
+
+            <% }) %>
+
+        </div>
+
+    <% } %>
+
+</main>
+
+<%- include("../partials/footer") %>
