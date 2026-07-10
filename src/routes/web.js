@@ -12,8 +12,6 @@ import {
 } from "../controllers/cartController.js";
 
 
-
-
 import {
     checkout,
     placeOrder,
@@ -38,6 +36,13 @@ router.post("/cart/increase/:index", increaseQuantity);
 router.post("/cart/decrease/:index", decreaseQuantity);
 
 router.get("/checkout", checkout);
+
+router.get("/checkout/success", (req, res) => {
+    res.render("pages/success", {
+        title: "Order Successful",
+    });
+});
+
 router.post("/checkout", placeOrder);
 
 export default router;
