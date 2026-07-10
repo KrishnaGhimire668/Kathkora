@@ -11,6 +11,14 @@ import {
     decreaseQuantity,
 } from "../controllers/cartController.js";
 
+
+
+
+import {
+    checkout,
+    placeOrder,
+} from "../controllers/checkoutController.js";
+
 const router = Router();
 
 router.get("/", home);
@@ -28,5 +36,8 @@ router.post("/cart/remove/:index", removeFromCart);
 router.post("/cart/increase/:index", increaseQuantity);
 
 router.post("/cart/decrease/:index", decreaseQuantity);
+
+router.get("/checkout", checkout);
+router.post("/checkout", placeOrder);
 
 export default router;
