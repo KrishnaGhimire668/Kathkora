@@ -1,10 +1,38 @@
 import Product from "../models/Product.js";
 import Order from "../models/Order.js";
+import User from "../models/User.js";
 
-export function dashboard(req, res) {
-    res.render("pages/admin/dashboard", {
-        title: "Admin Dashboard",
-    });
+export async function dashboard(req, res) {
+    try {
+
+        const [products, orders, users, revenue] = await Promise.all([
+            Product.countDocuments(),
+            Order.countDocuments(),
+            User.countDocuments(),
+            Order.aggregate([
+                {
+                    $group: {
+                        _id: null,
+                        total: { $sum: "$total" }
+                    }
+                }
+            ])
+        ]);
+
+        res.render("pages/admin/dashboard", {
+            title: "Admin Dashboard",
+            stats: {
+                products,
+                orders,
+                users,
+                revenue: revenue[0]?.total || 0,
+            },
+        });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Internal Server Error");
+    }
 }
 
 export async function products(req, res) {

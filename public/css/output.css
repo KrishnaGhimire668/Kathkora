@@ -1458,3 +1458,9 @@ a {
     line-height: 1;
   }
 }
+
+@media (min-width: 1280px) {
+  .xl\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
