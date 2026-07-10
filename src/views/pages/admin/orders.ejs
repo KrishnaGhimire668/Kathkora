@@ -1,0 +1,146 @@
+<%- include("../../partials/head") %>
+<%- include("../../partials/navbar") %>
+
+<main class="mx-auto max-w-7xl px-6 pt-24 pb-20">
+
+    <div class="mb-10">
+
+        <h1 class="text-4xl font-semibold">
+            Manage Orders
+        </h1>
+
+        <p class="mt-3 text-stone-400">
+            Review customer orders and update their status.
+        </p>
+
+    </div>
+
+    <% if (!orders.length) { %>
+
+        <div class="rounded-3xl border border-white/10 p-12 text-center">
+
+            <h2 class="text-2xl font-semibold">
+                No orders found
+            </h2>
+
+        </div>
+
+    <% } else { %>
+
+        <div class="space-y-8">
+
+            <% orders.forEach(order => { %>
+
+                <div class="rounded-3xl border border-white/10 p-8">
+
+                    <div class="mb-8 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+
+                        <div>
+
+                            <h2 class="text-2xl font-semibold">
+                                Order #<%= order._id.toString().slice(-6).toUpperCase() %>
+                            </h2>
+
+                            <p class="mt-2 text-stone-400">
+                                <%= order.createdAt.toDateString() %>
+                            </p>
+
+                            <p class="mt-2 text-stone-400">
+                                <strong>Customer:</strong>
+                                <%= order.name %>
+                            </p>
+
+                            <p class="text-stone-400">
+                                <%= order.email %>
+                            </p>
+
+                        </div>
+
+                        <form
+                            action="/admin/orders/<%= order._id %>"
+                            method="POST"
+                            class="flex items-center gap-3">
+
+                            <select
+                                name="status"
+                                class="rounded-xl border border-white/20 bg-neutral-900 px-4 py-3">
+
+                                <% ["Pending","Processing","Shipped","Delivered","Cancelled"].forEach(status => { %>
+
+                                    <option
+                                        value="<%= status %>"
+                                        <%= order.status === status ? "selected" : "" %>>
+
+                                        <%= status %>
+
+                                    </option>
+
+                                <% }) %>
+
+                            </select>
+
+                            <button
+                                type="submit"
+                                class="rounded-xl bg-white px-5 py-3 font-medium text-black transition hover:opacity-90">
+
+                                Save
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                    <div class="space-y-3">
+
+                        <% order.items.forEach(item => { %>
+
+                            <div class="flex items-center justify-between rounded-2xl border border-white/10 p-4">
+
+                                <div>
+
+                                    <h3 class="font-medium">
+                                        <%= item.name %>
+                                    </h3>
+
+                                    <p class="text-sm text-stone-400">
+                                        Size: <%= item.size %> • Qty: <%= item.quantity %>
+                                    </p>
+
+                                </div>
+
+                                <div class="font-semibold">
+
+                                    Rs. <%= (item.price * item.quantity).toLocaleString() %>
+
+                                </div>
+
+                            </div>
+
+                        <% }) %>
+
+                    </div>
+
+                    <hr class="my-6 border-white/10">
+
+                    <div class="flex items-center justify-between text-xl font-semibold">
+
+                        <span>Total</span>
+
+                        <span>
+                            Rs. <%= order.total.toLocaleString() %>
+                        </span>
+
+                    </div>
+
+                </div>
+
+            <% }) %>
+
+        </div>
+
+    <% } %>
+
+</main>
+
+<%- include("../../partials/footer") %>

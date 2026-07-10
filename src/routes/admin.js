@@ -11,6 +11,7 @@ import {
     updateProduct,
     deleteProduct,
     orders,
+    updateOrderStatus,
 } from "../controllers/adminController.js";
 
 const router = Router();
@@ -30,5 +31,7 @@ router.post("/products/edit/:id", isAdmin, updateProduct);
 router.post("/products/delete/:id", isAdmin, deleteProduct);
 
 router.get("/orders", isAdmin, orders);
+
+router.post("/orders/:id", isAdmin, updateOrderStatus);
 
 export default router;

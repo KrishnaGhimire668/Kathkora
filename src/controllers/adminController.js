@@ -177,3 +177,24 @@ export async function orders(req, res) {
 
     }
 }
+
+export async function updateOrderStatus(req, res) {
+    try {
+
+        const { status } = req.body;
+
+        await Order.findByIdAndUpdate(
+            req.params.id,
+            { status },
+            { new: true }
+        );
+
+        res.redirect("/admin/orders");
+
+    } catch (err) {
+
+        console.error(err);
+        res.status(500).send("Internal Server Error");
+
+    }
+}
