@@ -8,7 +8,7 @@ Kathakora demonstrates a modern SSR architecture with authentication, shopping c
 
 ## Live Demo
 
-**Live:** https://your-render-url.onrender.com
+**Live:** https://kathkora.onrender.com
 
 ---
 
