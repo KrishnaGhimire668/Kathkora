@@ -28,7 +28,20 @@ const __dirname = path.dirname(__filename);
 app.use(morgan("dev"));
 
 // Secure common HTTP headers
-app.use(helmet());
+app.use(
+    helmet({
+        contentSecurityPolicy: {
+            directives: {
+                imgSrc: [
+                    "'self'",
+                    "data:",
+                    "https://lh3.googleusercontent.com",
+                    "https://res.cloudinary.com",
+                ],
+            },
+        },
+    })
+);
 
 // Compress responses
 app.use(compression());

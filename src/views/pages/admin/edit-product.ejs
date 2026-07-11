@@ -10,7 +10,32 @@
     <form
         action="/admin/products/edit/<%= product._id %>"
         method="POST"
+        enctype="multipart/form-data"
         class="space-y-6">
+
+        <div class="text-center">
+
+            <img
+                src="<%= product.image %>"
+                class="mx-auto mb-5 h-56 rounded-2xl object-cover">
+
+            <p class="text-sm text-stone-400">
+                Current Image
+            </p>
+
+        </div>
+
+        <div>
+            <label class="mb-2 block text-sm text-stone-400">
+                Replace Image (optional)
+            </label>
+
+            <input
+                type="file"
+                name="image"
+                accept="image/*"
+                class="block w-full rounded-xl border border-white/10 p-4 file:mr-4 file:rounded-lg file:border-0 file:bg-white file:px-4 file:py-2 file:text-black">
+        </div>
 
         <input
             type="text"
@@ -26,33 +51,37 @@
             required
             class="w-full rounded-xl border border-white/10 bg-transparent p-4">
 
-        <input
-            type="number"
-            name="price"
-            value="<%= product.price %>"
-            required
-            class="w-full rounded-xl border border-white/10 bg-transparent p-4">
+        <div class="grid gap-6 md:grid-cols-2">
 
-        <input
-            type="text"
-            name="image"
-            value="<%= product.image %>"
-            required
-            class="w-full rounded-xl border border-white/10 bg-transparent p-4">
+            <input
+                type="number"
+                name="price"
+                value="<%= product.price %>"
+                required
+                class="w-full rounded-xl border border-white/10 bg-transparent p-4">
 
-        <input
-            type="text"
+            <input
+                type="number"
+                name="stock"
+                value="<%= product.stock %>"
+                required
+                class="w-full rounded-xl border border-white/10 bg-transparent p-4">
+
+        </div>
+
+        <select
             name="category"
-            value="<%= product.category %>"
-            required
-            class="w-full rounded-xl border border-white/10 bg-transparent p-4">
+            class="w-full rounded-xl border border-white/10 bg-[#111315] p-4">
 
-        <input
-            type="number"
-            name="stock"
-            value="<%= product.stock %>"
-            required
-            class="w-full rounded-xl border border-white/10 bg-transparent p-4">
+            <option value="T-Shirts" <%= product.category==="T-Shirts" ? "selected" : "" %>>T-Shirts</option>
+
+            <option value="Hoodies" <%= product.category==="Hoodies" ? "selected" : "" %>>Hoodies</option>
+
+            <option value="Jackets" <%= product.category==="Jackets" ? "selected" : "" %>>Jackets</option>
+
+            <option value="Accessories" <%= product.category==="Accessories" ? "selected" : "" %>>Accessories</option>
+
+        </select>
 
         <input
             type="text"
@@ -61,11 +90,14 @@
             class="w-full rounded-xl border border-white/10 bg-transparent p-4">
 
         <label class="flex items-center gap-3">
+
             <input
                 type="checkbox"
                 name="featured"
                 <%= product.featured ? "checked" : "" %>>
+
             Featured Product
+
         </label>
 
         <div class="flex gap-4">
@@ -74,7 +106,7 @@
                 type="submit"
                 class="rounded-full bg-white px-8 py-4 font-semibold text-black">
 
-                Update Product
+                Save Changes
 
             </button>
 

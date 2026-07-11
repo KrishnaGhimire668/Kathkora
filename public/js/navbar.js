@@ -1,6 +1,22 @@
-const button = document.getElementById("menu-btn");
-const menu = document.getElementById("mobile-menu");
+const menuButton = document.getElementById("menu-btn");
+const mobileMenu = document.getElementById("mobile-menu");
 
-button?.addEventListener("click", () => {
-    menu.classList.toggle("hidden");
+menuButton?.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+});
+
+const profileButton = document.getElementById("profile-btn");
+const profileDropdown = document.getElementById("profile-dropdown");
+
+profileButton?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    profileDropdown?.classList.toggle("hidden");
+});
+
+profileDropdown?.addEventListener("click", (e) => {
+    e.stopPropagation();
+});
+
+document.addEventListener("click", () => {
+    profileDropdown?.classList.add("hidden");
 });

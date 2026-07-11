@@ -1,0 +1,50 @@
+<%- include("../partials/head") %>
+<%- include("../partials/navbar") %>
+
+<main class="mx-auto flex min-h-[80vh] max-w-4xl items-center justify-center px-6 py-24">
+
+    <div class="w-full rounded-3xl border border-white/10 p-12 text-center">
+
+        <div class="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-green-500/10 text-5xl">
+            ✓
+        </div>
+
+        <h1 class="mt-8 text-4xl font-semibold">
+            Order Placed Successfully
+        </h1>
+
+        <p class="mt-4 text-stone-400">
+            Thank you for shopping with Kathakora.
+            Your order has been received and is currently
+            <span class="font-semibold text-white">Pending</span>.
+        </p>
+
+        <div class="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
+
+            <% if (locals.user) { %>
+
+                <a
+                    href="/orders"
+                    class="rounded-full bg-white px-8 py-4 font-medium text-black transition hover:opacity-90">
+
+                    View My Orders
+
+                </a>
+
+            <% } %>
+
+            <a
+                href="/shop"
+                class="rounded-full border border-white/20 px-8 py-4 transition hover:bg-white hover:text-black">
+
+                Continue Shopping
+
+            </a>
+
+        </div>
+
+    </div>
+
+</main>
+
+<%- include("../partials/footer") %>

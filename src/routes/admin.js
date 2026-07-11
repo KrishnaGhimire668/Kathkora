@@ -14,6 +14,8 @@ import {
     updateOrderStatus,
 } from "../controllers/adminController.js";
 
+import upload from "../middleware/upload.js";
+
 const router = Router();
 
 router.get("/", isAdmin, dashboard);
@@ -22,11 +24,21 @@ router.get("/products", isAdmin, products);
 
 router.get("/products/new", isAdmin, newProduct);
 
-router.post("/products", isAdmin, createProduct);
-
 router.get("/products/edit/:id", isAdmin, editProduct);
 
-router.post("/products/edit/:id", isAdmin, updateProduct);
+router.post(
+    "/products",
+    isAdmin,
+    upload.single("image"),
+    createProduct
+);
+router.post(
+    "/products/edit/:id",
+    isAdmin,
+    upload.single("image"),
+    updateProduct
+);
+
 
 router.post("/products/delete/:id", isAdmin, deleteProduct);
 

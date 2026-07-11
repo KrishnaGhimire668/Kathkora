@@ -1,5 +1,6 @@
 import redis from "../config/redis.js";
 import Product from "../models/Product.js";
+import getCartKey from "../utils/cartKey.js";
 
 export async function addToCart(req, res) {
     try {
@@ -19,7 +20,7 @@ export async function addToCart(req, res) {
             });
         }
 
-        const cartKey = "kathakora:cart:guest";
+        const cartKey = getCartKey(req);
 
         const cartItems = await redis.lRange(cartKey, 0, -1);
 
@@ -74,7 +75,8 @@ export async function addToCart(req, res) {
 export async function removeFromCart(req, res) {
     try {
 
-        const cartKey = "kathakora:cart:guest";
+        const cartKey = getCartKey(req);
+
         const indexToRemove = Number(req.params.index);
 
         const cartItems = await redis.lRange(cartKey, 0, -1);
@@ -102,7 +104,8 @@ export async function removeFromCart(req, res) {
 export async function viewCart(req, res) {
     try {
 
-        const cartKey = "kathakora:cart:guest";
+        const cartKey = getCartKey(req);
+
         const cartItems = await redis.lRange(cartKey, 0, -1);
 
         if (!cartItems.length) {
@@ -179,7 +182,8 @@ export async function viewCart(req, res) {
 
 export async function increaseQuantity(req, res) {
     try {
-        const cartKey = "kathakora:cart:guest";
+        const cartKey = getCartKey(req);
+
         const index = Number(req.params.index);
 
         const cartItems = await redis.lRange(cartKey, 0, -1);
@@ -214,7 +218,8 @@ export async function increaseQuantity(req, res) {
 
 export async function decreaseQuantity(req, res) {
     try {
-        const cartKey = "kathakora:cart:guest";
+        const cartKey = getCartKey(req);
+
         const index = Number(req.params.index);
 
         const cartItems = await redis.lRange(cartKey, 0, -1);

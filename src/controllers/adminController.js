@@ -63,7 +63,6 @@ export async function createProduct(req, res) {
             name,
             slug,
             price,
-            image,
             category,
             stock,
             featured,
@@ -74,7 +73,7 @@ export async function createProduct(req, res) {
             name,
             slug,
             price,
-            image,
+            image: req.file?.path || "",
             category,
             stock,
             featured: featured === "on",
@@ -86,8 +85,10 @@ export async function createProduct(req, res) {
         res.redirect("/admin/products");
 
     } catch (err) {
+
         console.error(err);
         res.status(500).send("Internal Server Error");
+
     }
 }
 
@@ -118,31 +119,40 @@ export async function updateProduct(req, res) {
             name,
             slug,
             price,
-            image,
             category,
             stock,
             featured,
             sizes,
         } = req.body;
 
-        await Product.findByIdAndUpdate(req.params.id, {
+        const updateData = {
             name,
             slug,
             price,
-            image,
             category,
             stock,
             featured: featured === "on",
             sizes: sizes
                 ? sizes.split(",").map(size => size.trim())
                 : ["S", "M", "L", "XL"],
-        });
+        };
+
+        if (req.file) {
+            updateData.image = req.file.path;
+        }
+
+        await Product.findByIdAndUpdate(
+            req.params.id,
+            updateData
+        );
 
         res.redirect("/admin/products");
 
     } catch (err) {
+
         console.error(err);
         res.status(500).send("Internal Server Error");
+
     }
 }
 

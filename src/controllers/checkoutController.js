@@ -1,9 +1,10 @@
 import redis from "../config/redis.js";
 import Product from "../models/Product.js";
 import Order from "../models/Order.js";
+import getCartKey from "../utils/cartKey.js";
 
 export async function checkout(req, res) {
-    const cartKey = "kathakora:cart:guest";
+    const cartKey = getCartKey(req);
 
     const cartItems = await redis.lRange(cartKey, 0, -1);
 
@@ -53,7 +54,8 @@ export async function placeOrder(req, res) {
 
         const { name, email, phone, address } = req.body;
 
-        const cartKey = "kathakora:cart:guest";
+        const cartKey = getCartKey(req);
+
 
         const cartItems = await redis.lRange(cartKey, 0, -1);
 
